@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-@Repository
+
 public class UserRepository {
 
     private final JdbcTemplate jdbcTemplate;
