@@ -1,6 +1,6 @@
 package com.group.libraryapp.config;
 
-import com.group.libraryapp.repository.user.UserRepository;
+import com.group.libraryapp.repository.user.UserJdbcRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -17,8 +17,8 @@ public class UserConfiguration {
      UserRepository에서 필요한 의존성과 UserRepository를 스프링 컨테이너에 등록한다.
      */
     @Bean
-    public UserRepository userRepository(JdbcTemplate jdbcTemplate) {
-        return new UserRepository(jdbcTemplate);
+    public UserJdbcRepository userRepository(JdbcTemplate jdbcTemplate) {
+        return new UserJdbcRepository(jdbcTemplate);
     }
 
 }

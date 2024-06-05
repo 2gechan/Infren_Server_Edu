@@ -25,3 +25,16 @@
 - 한 인터페이스에 여러 `@Service`, `@Repository`가 구현되었을 때 해당 `@Service`나 `@Repository`를 어떤걸 사용할지 명시하여 스프링 빈을 주입해줄 수 있다.
 - A 구현체에 @Primary, B구현체에 @Qualifier가 있고 A,B가 구현한 인터페이스를 C에서 생성자를 통해 주입할 경우 C 생성자의 @Qualifier가 등록되어 있다면 B구현체가 등록되게 된다.
 
+## JPA
+- `Spring Data JPA` : 복잡한 JPA 코드를 스프링과 함꼐 쉽게 사용할 수 있도록 도와주는 라이브러리
+- `save` : 주어지는 객체를 저장하거나 업데이트 시켜준다.
+- `findAll` : 주어지는 객체가 매핑된 테이블의 모든 데이터를 가져온다.
+- `findById` : id(pk)를 기준으로 특정한 1개의 데이터를 가져온다.
+
+```
+JPA 사용시 계층 구조
+Spring Data JPA
+JPA (ORM)
+Hibernate (JPA 구현체)
+JDBC
+```

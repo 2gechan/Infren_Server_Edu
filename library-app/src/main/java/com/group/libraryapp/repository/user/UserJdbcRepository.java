@@ -4,18 +4,17 @@ import com.group.libraryapp.UserResponse;
 import com.group.libraryapp.controller.domain.user.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 
-public class UserRepository {
+public class UserJdbcRepository {
 
     private final JdbcTemplate jdbcTemplate;
 
-    public UserRepository(JdbcTemplate jdbcTemplate) {
+    public UserJdbcRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
@@ -39,7 +38,7 @@ public class UserRepository {
                         long id = rs.getLong("id");
                         String name = rs.getString("name");
                         int age = rs.getInt("age");
-                        return new UserResponse(id, new User(name, age));
+                        return new UserResponse(id, name, age);
                     }
                 }
         );

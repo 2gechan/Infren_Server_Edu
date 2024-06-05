@@ -5,7 +5,7 @@ import com.group.libraryapp.controller.domain.user.Fruit;
 import com.group.libraryapp.dto.user.request.UserCreateRequest;
 import com.group.libraryapp.dto.user.request.UserUpdateRequest;
 import com.group.libraryapp.service.fruit.FruitService;
-import com.group.libraryapp.service.user.UserService;
+import com.group.libraryapp.service.user.UserServiceV1;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,18 +14,18 @@ import java.util.List;
 @RestController
 public class UserController {
 
-    private final UserService userService;
+    private final UserServiceV1 userServiceV1;
     private final FruitService fruitService;
-    public UserController(UserService userService, @Qualifier("main") FruitService fruitService)
+    public UserController(UserServiceV1 userServiceV1, @Qualifier("main") FruitService fruitService)
     {
         this.fruitService = fruitService;
-        this.userService = userService;
+        this.userServiceV1 = userServiceV1;
     }
 
 
     @PostMapping("/user")
     public void saveUser(@RequestBody UserCreateRequest request) {
-        userService.saveUser(request.getName(), request.getAge());
+        userServiceV1.saveUser(request.getName(), request.getAge());
     }
 
     @GetMapping("/fruit")
@@ -35,17 +35,17 @@ public class UserController {
 
     @GetMapping("/user")
     public List<UserResponse> getUsers() {
-        return userService.getUsers();
+        return userServiceV1.getUsers();
     }
 
     @PutMapping("/user")
     public void updateUser(@RequestBody UserUpdateRequest request) {
-        userService.updateUser(request);
+        userServiceV1.updateUser(request);
     }
 
     @DeleteMapping("/user")
     public void deleteUser(@RequestParam String name) {
-        userService.deleteUser(name);
+        userServiceV1.deleteUser(name);
     }
 
     @GetMapping("/user/error-test")
