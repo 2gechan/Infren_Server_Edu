@@ -8,7 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 /*
 설정 파일로 빈 주입해주기
  */
-@Configuration
+//@Configuration
 public class UserConfiguration {
 
     /*
@@ -16,7 +16,7 @@ public class UserConfiguration {
      Configuration 클래스에서 @Configuration 어노테이션을 설정해주고
      UserRepository에서 필요한 의존성과 UserRepository를 스프링 컨테이너에 등록한다.
      */
-    @Bean
+//    @Bean
     public UserJdbcRepository userRepository(JdbcTemplate jdbcTemplate) {
         return new UserJdbcRepository(jdbcTemplate);
     }
