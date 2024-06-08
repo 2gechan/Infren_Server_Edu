@@ -38,3 +38,34 @@ JPA (ORM)
 Hibernate (JPA 구현체)
 JDBC
 ```
+### JPA 사용시 By 앞에 들어갈 수 있는 구절
+- find : 1건을 가져온다. 반환 타입은 객체가 될 수도 있고, Optional<타입>이 될 수도 있다.
+- findAll : 쿼리의 결과물이 N개인 경우 사용. List<타입> 반환
+- exists : 쿼리 결과가 존재하는지 확인. 반환 타입은 boolean
+- count : 쿼리 결과 개수. 반환 타입 long
+- 각 구절별 AND, OR 조합로 조합할 수도 있다.
+
+#### By 뒤에 들어갈 수 있는 구절
+- GreaterThan : 초과
+- GreaterThanEqual : 이상
+- LessThan : 미만
+- LessThanEqual : 이하
+- Between : 사이에
+- StartsWith : ~로 시작하는
+- EndsWith : ~로 끝나는
+
+### @Transactional
+- @Transactional Annotation이 붙은 함수는 mysql 내의 start transaction을 해준다
+- 함수가 예외 없이 내부 로직이 전부 수행된다면 commit
+- 예외가 발생하거나 문제가 발생하면 rollback
+
+
+#### 변경 감지(dirty check)
+- 트랜잭션이 시작하게 되면 영속성 컨텍스트가 생성된다.
+- 영속성 컨텍스트 안에서 변경 감지(dirty check) 하게 되면 명시적으로 save를 해주지 않더라도 트랜잭션이 끝날 때 자동으로 업데이트 해주게 된다.
+
+#### 쓰기 지연
+- 저장, 삭제, 업데이트 등을 로직에 따라 개별적으로 수행하는게 아닌 한번에 모아서 수행
+
+#### 1차 캐싱
+- Id가 1인 유저를 불러 왔을 경우, 영속성 컨텍스트에 기억하고 있다가 재 조회 하는 경우 수행하지 않고 캐싱해 놓은 객체를 불러온다. 이렇게 캐싱된 객체는 완전히 동일하다.
