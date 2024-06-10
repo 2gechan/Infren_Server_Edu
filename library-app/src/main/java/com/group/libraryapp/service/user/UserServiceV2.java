@@ -1,14 +1,13 @@
 package com.group.libraryapp.service.user;
 
 import com.group.libraryapp.UserResponse;
-import com.group.libraryapp.controller.domain.user.User;
-import com.group.libraryapp.controller.domain.user.UserRepository;
+import com.group.libraryapp.domain.user.User;
+import com.group.libraryapp.domain.user.UserRepository;
 import com.group.libraryapp.dto.user.request.UserCreateRequest;
 import com.group.libraryapp.dto.user.request.UserUpdateRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 

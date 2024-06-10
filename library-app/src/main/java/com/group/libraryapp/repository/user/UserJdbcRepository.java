@@ -1,7 +1,6 @@
 package com.group.libraryapp.repository.user;
 
 import com.group.libraryapp.UserResponse;
-import com.group.libraryapp.controller.domain.user.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;

@@ -1,6 +1,6 @@
 package com.group.libraryapp;
 
-import com.group.libraryapp.controller.domain.user.User;
+import com.group.libraryapp.domain.user.User;
 
 public class UserResponse {
     private long id;

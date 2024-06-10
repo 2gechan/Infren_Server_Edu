@@ -1,7 +1,7 @@
 package com.group.libraryapp.controller.user;
 
 import com.group.libraryapp.UserResponse;
-import com.group.libraryapp.controller.domain.user.Fruit;
+import com.group.libraryapp.domain.user.Fruit;
 import com.group.libraryapp.dto.user.request.UserCreateRequest;
 import com.group.libraryapp.dto.user.request.UserUpdateRequest;
 import com.group.libraryapp.service.fruit.FruitService;
