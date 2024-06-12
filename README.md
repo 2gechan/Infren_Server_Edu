@@ -39,10 +39,10 @@ Hibernate (JPA 구현체)
 JDBC
 ```
 ### JPA 사용시 By 앞에 들어갈 수 있는 구절
-- find : 1건을 가져온다. 반환 타입은 객체가 될 수도 있고, Optional<타입>이 될 수도 있다.
-- findAll : 쿼리의 결과물이 N개인 경우 사용. List<타입> 반환
-- exists : 쿼리 결과가 존재하는지 확인. 반환 타입은 boolean
-- count : 쿼리 결과 개수. 반환 타입 long
+- `find` : 1건을 가져온다. 반환 타입은 객체가 될 수도 있고, Optional<타입>이 될 수도 있다.
+- `findAll` : 쿼리의 결과물이 N개인 경우 사용. List<타입> 반환
+- `exists` : 쿼리 결과가 존재하는지 확인. 반환 타입은 boolean
+- `count` : 쿼리 결과 개수. 반환 타입 long
 - 각 구절별 AND, OR 조합로 조합할 수도 있다.
 
 #### By 뒤에 들어갈 수 있는 구절
@@ -55,7 +55,7 @@ JDBC
 - EndsWith : ~로 끝나는
 
 ### @Transactional
-- @Transactional Annotation이 붙은 함수는 mysql 내의 start transaction을 해준다
+- `@Transactional` Annotation이 붙은 함수는 mysql 내의 start transaction을 해준다
 - 함수가 예외 없이 내부 로직이 전부 수행된다면 commit
 - 예외가 발생하거나 문제가 발생하면 rollback
 
@@ -69,3 +69,44 @@ JDBC
 
 #### 1차 캐싱
 - Id가 1인 유저를 불러 왔을 경우, 영속성 컨텍스트에 기억하고 있다가 재 조회 하는 경우 수행하지 않고 캐싱해 놓은 객체를 불러온다. 이렇게 캐싱된 객체는 완전히 동일하다.
+
+
+### @ManyToOne, @OneToMany
+- DB 객체의 N:1, 1:N 관계를 매핑 시켜주는 어노테이션
+- 1:1 관계는 `@OneToOne`
+
+#### 연관관계
+- 연관관계의 주인 : Table을 보았을 때 누가 관계의 주도권을 가지고 있는가
+- 두 객체가 있을 때 한 객체가 특정 객체를 바라보는 방향 ex) 판매이력테이블과 상품 두 테이블이 있다면 판매이력 테이블은 상품을 바라보고 있다. 그렇게 되면 판매이력테이블이 주도권을 가지고 있다.
+- 결론적으로 상대 테이블을 참조하고 있다면 연관관계의 주인
+- 연관관계 주인이 아니라면 mappedBy를 사용
+- 연관관계의 주인의 setter가 사용되어야만 Table 연결
+- 1:1일 경우에는 어느쪽이 연관관계의 주인일지 모르지만, 1:N일 경우에는 N이 연관관계의 주인이다.
+- cascade 옵션 : 저장이나 삭제를 할 때 연관관계에 놓인 테이블까지 함꼐 저장 또는 삭제 된다.
+- orpahnRemoval 옵션을 활용하면, 연관관계가 끊어진 데이터를 자동으로 제거해준다.
+```java
+유저반입반출이력테이블
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id = null;
+
+    @ManyToOne
+    private User user;
+    private String bookName;
+    private boolean isReturn;
+
+
+User테이블
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id = null;
+
+    @Column(nullable = false, length = 25, name = "name")
+    private String name;
+
+    private Integer age;
+
+    @OneToMany(mappedBy = "user")
+    private List<UserLoanHistory> userLoanHistories = new ArrayList<>();
+```
+
