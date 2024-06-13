@@ -44,7 +44,8 @@ public class BookService {
         User user = userRepository.findByName(request.getUserName())
                 .orElseThrow(IllegalArgumentException::new);
 
-        userLoanHistoryRepository.save(new UserLoanHistory(user, book.getName()));
+        user.loanBook(book.getName());
+        // userLoanHistoryRepository.save(new UserLoanHistory(user, book.getName()));
     }
 
     @Transactional
@@ -52,11 +53,14 @@ public class BookService {
         User user = userRepository.findByName(request.getUserName())
                 .orElseThrow(IllegalArgumentException::new);
 
+        user.returnBook(request.getBookName());
+        /*
         UserLoanHistory history= userLoanHistoryRepository
                                             .findByUserIdAndBookName(user.getId(), request.getBookName())
                                             .orElseThrow(IllegalArgumentException::new);
 
         // 영속성 컨텍스트의 변경 감지 기능으로 인해 update 해주지 않아도 된다.
         history.doReturn();
+         */
     }
 }

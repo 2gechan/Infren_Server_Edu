@@ -110,3 +110,6 @@ User테이블
     private List<UserLoanHistory> userLoanHistories = new ArrayList<>();
 ```
 
+#### 지연 로딩
+- 영속성 컨텍스트의 기능으로, 데이터가 꼭 필요한 순간에 데이터베이스에서 가져온다.
+- @OneTomMany에 있는 fetch()의 LAZY 옵션 
