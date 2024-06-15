@@ -113,3 +113,54 @@ User테이블
 #### 지연 로딩
 - 영속성 컨텍스트의 기능으로, 데이터가 꼭 필요한 순간에 데이터베이스에서 가져온다.
 - @OneTomMany에 있는 fetch()의 LAZY 옵션 
+
+
+## 접속 환경 제어
+```yml
+spring:
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    url: "jdbc:h2:mem:library;MODE=MYSQL;NON_KEYWORDS=USER"
+    username: "sa"
+    password: ""
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        show_sql: true
+        format_sql: ture
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: "jdbc:mysql://localhost/library"
+    username: "root"
+    password: ""
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+```
+- spring:
+  config:
+    activate:
+      on-profile: dev
+  Edit Configuration 설정을 통해 local DB, 운영 DB, 개발 DB 등등에 접속 제어할 수 있다.
